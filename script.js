@@ -1,12 +1,12 @@
 document.addEventListener('DOMContentLoaded', function () {
-    var quizForm = document.getElementById('quiz-form');
-    var alertDiv = document.getElementById('alert');
-    var allCorrect = false; // Variable pour suivre si toutes les réponses sont correctes
+    let quizForm = document.getElementById('quiz-form');
+    let alertDiv = document.getElementById('alert');
+    let allCorrect = false; // Variable pour suivre si toutes les réponses sont correctes
 
     // Vérifiez s'il y a déjà eu une réussite précédente
-    var hasPreviousSuccess = localStorage.getItem('quizSuccess') === 'true';
+    let hasPreviousSuccess = localStorage.getItem('quizSuccess') === 'true';
     if (hasPreviousSuccess) {
-        showCongratulationsMessage();
+        congratulationMessage();
     }
 
     quizForm.addEventListener('submit', function (event) {
@@ -15,14 +15,14 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     function checkAnswers() {
-        var questions = document.querySelectorAll('.question-item');
+        let questions = document.querySelectorAll('.question-item');
         resetAnswerStyles(questions);
-        var currentAllCorrect = true; // Variable pour suivre si toutes les réponses sont correctes pour cette soumission
+        let currentAllCorrect = true; // Variable pour suivre si toutes les réponses sont correctes pour cette soumission
 
         questions.forEach(function (question) {
-            var correctAnswer = question.querySelector('.answer[value="true"]');
-            var answers = question.querySelectorAll('.answer');
-            var isCorrectSelected = Array.from(answers).some(answer => answer.checked && answer.value === 'true');
+            let correctAnswer = question.querySelector('.answer[value="true"]');
+            let answers = question.querySelectorAll('.answer');
+            let isCorrectSelected = Array.from(answers).some(answer => answer.checked && answer.value === 'true');
 
             if (!isCorrectSelected) {
                 highlightIncorrectQuestion(question);
@@ -35,7 +35,7 @@ document.addEventListener('DOMContentLoaded', function () {
         // Comparer l'état actuel avec l'état précédent
         if (currentAllCorrect && !allCorrect) {
             allCorrect = true;
-            showCongratulationsMessage();
+            congratulationMessage();
         } else if (!currentAllCorrect && allCorrect) {
             // L'utilisateur a répondu correctement précédemment, mais la réponse actuelle est incorrecte
             allCorrect = false;
@@ -57,7 +57,7 @@ document.addEventListener('DOMContentLoaded', function () {
         question.classList.add('correct');
     }
 
-    function showCongratulationsMessage() {
+    function congratulationMessage() {
         // Affichez le message de félicitations seulement si toutes les réponses sont correctes
         if (allCorrect) {
             alertDiv.style.display = 'block';
