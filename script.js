@@ -1,79 +1,50 @@
-document.addEventListener('DOMContentLoaded', function () {
-    let quizForm = document.getElementById('quiz-form');
-    let alertDiv = document.getElementById('alert');
-    let allCorrect = false; 
+function getFilmsFromAPI() {
+    const apiUrl = "https://ghibliapi.vercel.app/films";
+  
+    fetch(apiUrl)
+      .then(response => {
+        if (!response.ok) {
+          throw new Error(`Erreur de réseau (statut ${response.status})`);
+        }
+  
+        return response.json();
+      })
+      .then(films => {
+        displayFilms(films);
+      })
+      .catch(error => {
+        console.error("Erreur lors de la récupération des films :", error.message);
+      });
+  }
 
-    let hasPreviousSuccess = localStorage.getItem('quizSuccess') === 'true';
-    if (hasPreviousSuccess) {
-        congratulationMessage();
-    }
-
-    quizForm.addEventListener('submit', function (event) {
-        event.preventDefault();
-        checkAnswers(); 
+  function displayFilms(films) {
+    const filmList = document.getElementById("filmList");
+  
+    films.forEach(film => {
+      const li = document.createElement("li");
+      li.innerHTML = `
+        <div class="film-item">
+            <img src="${film.image}" alt="${film.title}">
+          <div class="film-details">
+            <p id="filmeTitre_Director">${film.title} <br> ${film.director}</p>
+          </div>
+          <div class="film-actions">
+            <button onclick="viewDetails('${film.title}', '${film.original_title}', '${film.director}')" id = "view">View</button>
+            <p id = "original_title">${film.original_title}</p>
+          </div>
+        </div>
+      `;
+      filmList.appendChild(li);
     });
+  }
+  
+  function viewDetails(title, originalTitle, director) {
+    alert(`View details for ${title} (${originalTitle}) directed by ${director}`);
+  }
+  
+  
+  function viewDetails(title, originalTitle) {
+    alert(`View details for ${title} (${originalTitle})`);
+  }
 
-    function checkAnswers() {
-        let questions = document.querySelectorAll('.question-item');
-        resetAnswerStyles(questions);
-        let currentAllCorrect = true; 
-
-        questions.forEach(function (question) {
-            let correctAnswer = question.querySelector('.answer[value="true"]');
-            let answers = question.querySelectorAll('.answer');
-            let isCorrectSelected = Array.from(answers).some(answer => answer.checked && answer.value === 'true');
-
-            if (!isCorrectSelected) {
-                highlightIncorrectQuestion(question);
-                currentAllCorrect = false;
-            } else {
-                highlightCorrectQuestion(question);
-            }
-        });
-
-        if (currentAllCorrect && !allCorrect) {
-            allCorrect = true;
-            congratulationMessage();
-        } else if (!currentAllCorrect && allCorrect) {
-            allCorrect = false;
-            hideCongratulationsMessage();
-        }
-    }
-
-    function resetAnswerStyles(questions) {
-        questions.forEach(function (question) {
-            question.classList.remove('correct', 'incorrect');
-        });
-    }
-
-    function highlightIncorrectQuestion(question) {
-        question.classList.add('incorrect');
-    }
-
-    function highlightCorrectQuestion(question) {
-        question.classList.add('correct');
-    }
-
-    function congratulationMessage() {
-        if (allCorrect) {
-            alertDiv.style.display = 'block';
-            localStorage.setItem('quizSuccess', 'true');
-            
-            setTimeout(function() {
-                hideCongratulationsMessage();
-            }, 1300);
-        }
-    }       
-
-    function hideCongratulationsMessage() {
-        alertDiv.style.display = 'none';
-        localStorage.removeItem('quizSuccess');
-    }
-});
-
-
-
-
-
-
-
+  getFilmsFromAPI();  
