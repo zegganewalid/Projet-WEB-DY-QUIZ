@@ -1,155 +1,129 @@
-.incorrect {
-  color: red;
-}
-
-.correct {
-  color: green;
-}
-
 body {
-  font-family: 'Arial', sans-serif;
-  font-size: 16px;
-  line-height: 1.6;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  min-height: 100vh;
-  background-color: #3498db;
-}
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+  }
+  
+  header, footer {
+    background-color: #333;
+    color: #fff;
+    padding: 10px;
+    text-align: center;
+    font-family: 'Roboto', sans-serif;
+  }
+  
+  header h1 {
+    font-size: 2em;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin: 0;
+  }
+  
+  footer h1 {
+    font-size: 1.5em; 
+    font-weight: normal; 
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin: 0;
+  }
+  
+  main {
+    max-width: 100%;
+    background-color: #ffffff;
+  }
 
-header {
-  text-align: center;
-  margin-bottom: 20px;
-}
+  nav {
+    padding: 3%;
+    height: 200px;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    display: flex;
+    flex-direction: column; 
+  }
+  
+  nav h1 {
+    font-size:xx-large;
+    text-align: center;
+  }
+  
+  nav img {
+    max-width: 100%;
+    max-height: 100%;
+  }
+ 
+  #apiButton {
+    border: #007bff;
+    color: #fff;
+    border-radius: 5px;
+    padding: 10px;
+    cursor: pointer;
+    background-color: #007bff; 
+  }
 
-.quiz-title {
-  font-family: 'Pacifico', cursive; 
-  font-size: 36px;
-  color: white;
-  margin: 0;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-}
+  #allFilmsButton {
+    border : #808080;
+    color:#fff;
+    border-radius: 5px;
+    padding: 10px;
+    cursor: pointer;
+    background-color: #808080; 
+  }
+  
 
-#quiz-form {
-padding: 20px;
-border: 1px solid #ccc;
-border-radius: 10px;
-background-color: #fff; 
-}
+  ul {
+    padding: 35px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 35px;
+    background-color:#ffff
+  }
+  
+  li {
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px #0000001a;
+    border: 1px solid #ddd;
+  }
+  
+  li img {
+    width: 100%;
+    height: auto;
+  }
+  
+  li div {
+    padding: 0px;
+  }
 
-.button {
-background-color: #4CAF50;
-color: white;
-padding: 10px 20px;
-border: none;
-border-radius: 5px;
-cursor: pointer;
-}
-
-.button:hover {
-background-color: #45a049;
-}
-
-#alert {
-display: none;
-position: fixed;
-top: 50%;
-left: 50%;
-transform: translate(-50%, -50%);
-padding: 20px;
-background-color: #4CAF50; 
-color: white;
-text-align: center;
-border-radius: 10px;
-box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-transition: opacity 0.5s ease-in-out;
-}
-
-#quiz-form button[type="submit"] {
-background-color: #3498db; 
-color: white;
-padding: 10px 20px;
-border: none;
-border-radius: 5px;
-cursor: pointer;
-transition: background-color 0.3s ease-in-out; 
-}
-
-#quiz-form button[type="submit"]:hover {
-background-color: #2980b9;
-}
-
-
-.congratulations-message {
-display: none;
-position: fixed;
-top: 50%;
-left: 50%;
-transform: translate(-50%, -50%);
-padding: 30px; 
-background-color: #4CAF50;
-color: white;
-text-align: center;
-border-radius: 10px;
-box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-transition: opacity 0.5s ease-in-out;
-}
-
-.congratulations-message .alert-title {
-font-size: 24px; 
-font-weight: bold;
-margin-bottom: 15px;
-}
-
-.congratulations-message .message {
-font-size: 18px; 
-}
-
-.question-item {
-margin-bottom: 20px;
-padding: 20px;
-background-color: #f9f9f9;
-border-radius: 10px;
-box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.question-item div {
-font-size: 18px;
-margin-bottom: 15px;
-}
-
-.answer-item {
-margin-bottom: 10px;
-}
-
-.answer-item label {
-display: block;
-padding: 10px;
-background-color: #fff;
-border: 1px solid #ddd;
-border-radius: 5px;
-cursor: pointer;
-transition: background-color 0.3s ease-in-out;
-}
-
-.answer-item label:hover {
-background-color: #f0f0f0;
-}
-
-.answer-item input {
-margin-right: 10px;
-}
-
-
-.question-item ol {
-margin: 0;
-padding: 0;
-list-style: none;
-}
-
-.answer-item {
-margin-bottom: 10px;
-} 
+  .film-details {
+    padding: 15px;
+    
+  }
+  
+  .film-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+  }
+  
+  #view {
+    border: 1px solid #4a4949c9;
+    background-color:#fffafa;
+    color : #4a4949c9;
+    border-radius: 5px;
+    padding: 10px;
+    cursor: pointer;
+  }
+  
+  
+  #original_title {
+    text-align: right;
+    font-size: small;
+  }
+  
+  #filmeTitre_Director{
+    font-size: medium;
+  }
